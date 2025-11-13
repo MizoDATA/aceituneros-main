@@ -17,13 +17,7 @@ public class Main {
         double[] preciosVenta = new double[50];
         // variable para controlar las posiciones de los arrays
         int contadorVentas = 0;
-
         int opcion = 0;
-        String tipoAceituna = "";
-        String nombreProductor = "";
-        int tamanioAceituna = 0;
-        double kg = 0;
-        double precioVenta = 0;
 
         do {
 
@@ -52,17 +46,18 @@ public class Main {
                         // calcular
                         // Necesitamos: Precio inicial kg, total kg, tipo y tamaño aceituna
                         // Devuelve: precio venta double
-                        preciosVenta[contadorVentas] = Funciones.calcularPrecioVenta(Funciones.PRECIO_INICIAL, kg,
-                                pasarTamanioAceituna(tamanioAceituna), tipoAceituna);
+                        preciosVenta[contadorVentas] = Funciones.calcularPrecioVenta(Funciones.PRECIO_INICIAL, kilos[contadorVentas],
+                                tamanioAceitunas[contadorVentas], tipoAceitunas[contadorVentas]);
                         // System.out.println("El precio de venta es " + precioVenta);
 
                         String resultado = """
                                 El vendedor %s, trae a la almazara de Estepona
                                 %s kg de aceituna %s %s y se le ha vendido a %.3f€
-                                """.formatted(nombreProductor, kg, pasarTamanioAceituna(tamanioAceituna), tipoAceituna,
-                                precioVenta);
+                                """.formatted(nombres[contadorVentas], kilos[contadorVentas], tamanioAceitunas[contadorVentas], tipoAceitunas[contadorVentas],
+                                preciosVenta[contadorVentas]);
 
                         System.out.println(resultado);
+                        contadorVentas++;
                     }
                     case 2 -> {
                         JOptionPane.showMessageDialog(null, "Ver todas las ventas");
