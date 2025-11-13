@@ -46,14 +46,16 @@ public class Main {
                         // calcular
                         // Necesitamos: Precio inicial kg, total kg, tipo y tamaño aceituna
                         // Devuelve: precio venta double
-                        preciosVenta[contadorVentas] = Funciones.calcularPrecioVenta(Funciones.PRECIO_INICIAL, kilos[contadorVentas],
+                        preciosVenta[contadorVentas] = Funciones.calcularPrecioVenta(Funciones.PRECIO_INICIAL,
+                                kilos[contadorVentas],
                                 tamanioAceitunas[contadorVentas], tipoAceitunas[contadorVentas]);
                         // System.out.println("El precio de venta es " + precioVenta);
 
                         String resultado = """
                                 El vendedor %s, trae a la almazara de Estepona
                                 %s kg de aceituna %s %s y se le ha vendido a %.3f€
-                                """.formatted(nombres[contadorVentas], kilos[contadorVentas], tamanioAceitunas[contadorVentas], tipoAceitunas[contadorVentas],
+                                """.formatted(nombres[contadorVentas], kilos[contadorVentas],
+                                tamanioAceitunas[contadorVentas], tipoAceitunas[contadorVentas],
                                 preciosVenta[contadorVentas]);
 
                         System.out.println(resultado);
@@ -61,6 +63,22 @@ public class Main {
                     }
                     case 2 -> {
                         JOptionPane.showMessageDialog(null, "Ver todas las ventas");
+                        for (int i = 0; i < contadorVentas; i++) {
+                            String resultado = """
+                                    La venta numero %d
+                                    --------------------------------------------------
+
+                                    El vendedor %s, trae a la almazara de Estepona
+                                    %s kg de aceituna %s %s y se le ha vendido a %.3f€
+
+                                    --------------------------------------------------
+                                    """.formatted(i+1,nombres[i], kilos[i],
+                                    tamanioAceitunas[i], tipoAceitunas[i],
+                                    preciosVenta[i]);
+
+                            System.out.println(resultado);
+
+                        }
                     }
 
                     default -> {
