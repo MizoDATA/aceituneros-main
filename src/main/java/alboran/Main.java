@@ -7,18 +7,20 @@ public class Main {
 
         // Variables de tipo array para guardar los datos del programa
         // los arrays de objetos se crean con el contenido de cada casilla
-        // apuntando a null 
-        String[] nombre = new String[50];
+        // apuntando a null
+        String[] nombres = new String[50];
         String[] tipoAceitunas = new String[50];
-        String[] tamanioAceitunas = new String [50];
+        String[] tamanioAceitunas = new String[50];
         // los arrays de numeros se crean con el contenido de cada casilla
         // a 0.0
         double[] kilos = new double[50];
         double[] preciosVenta = new double[50];
+        // variable para controlar las posiciones de los arrays
+        int contadorVentas = 0;
 
         int opcion = 0;
         String tipoAceituna = "";
-        String nombreProductor="";
+        String nombreProductor = "";
         int tamanioAceituna = 0;
         double kg = 0;
         double precioVenta = 0;
@@ -30,40 +32,42 @@ public class Main {
                 // Si continua mi programa por aquí significa
                 // que no hay excepción NumberFormat
                 switch (opcion) {
-                    case 0->{
+                    case 0 -> {
                         JOptionPane.showMessageDialog(null, "Hasta pronto");
                     }
                     case 1 -> {
                         // Vender
                         // Pedir nombre
-                        nombreProductor = JOptionPane.showInputDialog("¿Cómo te llamas?");
+                        nombres[contadorVentas] = JOptionPane.showInputDialog("¿Cómo te llamas?");
                         // Pedir tipo
-                        tipoAceituna = Funciones.pedirTipoAceituna();
-                        //System.out.println("El tipo es: " + tipoAceituna);
+                        tipoAceitunas[contadorVentas] = Funciones.pedirTipoAceituna();
+                        // System.out.println("El tipo es: " + tipoAceituna);
                         // Pedir tamaño
                         // Devuelve un int indicando 1 gruesa y 2 fina
-                        tamanioAceituna = Funciones.pedirTamanioAceituna();
-                        //System.out.println("El tamaño es " + pasarTamanioAceituna(tamanioAceituna));
+                        tamanioAceitunas[contadorVentas] = pasarTamanioAceituna(Funciones.pedirTamanioAceituna());
+                        // System.out.println("El tamaño es " + pasarTamanioAceituna(tamanioAceituna));
                         // Pedir kg
-                        kg = Funciones.pedirKg();
-                        //System.out.println("Los kg son " + kg);
+                        kilos[contadorVentas] = Funciones.pedirKg();
+                        // System.out.println("Los kg son " + kg);
                         // calcular
                         // Necesitamos: Precio inicial kg, total kg, tipo y tamaño aceituna
                         // Devuelve: precio venta double
-                        precioVenta = Funciones.calcularPrecioVenta(Funciones.PRECIO_INICIAL, kg, pasarTamanioAceituna(tamanioAceituna), tipoAceituna);    
-                        //System.out.println("El precio de venta es " + precioVenta);
+                        preciosVenta[contadorVentas] = Funciones.calcularPrecioVenta(Funciones.PRECIO_INICIAL, kg,
+                                pasarTamanioAceituna(tamanioAceituna), tipoAceituna);
+                        // System.out.println("El precio de venta es " + precioVenta);
 
                         String resultado = """
                                 El vendedor %s, trae a la almazara de Estepona
                                 %s kg de aceituna %s %s y se le ha vendido a %.3f€
-                                """.formatted(nombreProductor, kg, pasarTamanioAceituna(tamanioAceituna),tipoAceituna, precioVenta);
+                                """.formatted(nombreProductor, kg, pasarTamanioAceituna(tamanioAceituna), tipoAceituna,
+                                precioVenta);
 
-                        System.out.println(resultado);        
+                        System.out.println(resultado);
                     }
                     case 2 -> {
                         JOptionPane.showMessageDialog(null, "Ver todas las ventas");
                     }
-                    
+
                     default -> {
                         JOptionPane.showMessageDialog(null, "Opción incorrecta");
                     }
@@ -78,9 +82,9 @@ public class Main {
         } while (opcion != 0);
     }
 
-    public static String pasarTamanioAceituna(int numero){
+    public static String pasarTamanioAceituna(int numero) {
         String tamanio;
-        tamanio = numero == 1?Funciones.GRUESA:Funciones.FINA;
+        tamanio = numero == 1 ? Funciones.GRUESA : Funciones.FINA;
         return tamanio;
     }
 }
